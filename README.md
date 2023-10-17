@@ -8,5 +8,10 @@ Linsun:
 Michelle:  
 
 General:  
--create nav bar for all page   
+-create all pages with the approciate input forms  
+-create nav bar for all pages   
 -create input forms on pages that will store data in JS  
+-create routes/controller functions that work with database  
+-Be able to use database with postman to test
+-code pages to show the data from database  
+-Design work on pages
