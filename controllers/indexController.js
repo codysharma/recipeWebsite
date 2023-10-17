@@ -1,5 +1,8 @@
+//Import bookmark models
+
 function index(req, res){
     res.render("index");
 }
-
-module.exports = index
+module.exports = {
+    index, 
+}
