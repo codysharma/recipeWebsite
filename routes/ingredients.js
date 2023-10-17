@@ -5,9 +5,10 @@ const router = express.Router()
 const IngredientList = require('../models/ingredientlist')
 
 //input links from controllers pages 
-const {individualIngredientList} = require('../controllers/ingredientsController')
+const {ingredientListById, allIngredientLists} = require('../controllers/ingredientsController')
 
 //-----Show individual ingredient list by ID
-router.get('/:id', individualIngredientList)
+router.get('/', allIngredientLists)
+// router.get('/:id', ingredientListById)
 
 module.exports = router

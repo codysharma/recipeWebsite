@@ -11,6 +11,15 @@ const ingredientListById = async (req, res) =>{
     // res.render("/", {individualIngredientList})
 }
 
+const allIngredientLists = async (req, res) => {
+    const ingredientsListTotal = await IngredientList.find()
+    res.json({
+        "Ingredient Lists": ingredientsListTotal,
+        "status": 200
+    })
+}
+
 module.exports = {
     ingredientListById, 
+    allIngredientLists
 }
