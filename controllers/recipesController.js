@@ -16,10 +16,12 @@ const showAllRecipes = async (req, res, next) => {
 
 const getRecipeById = async (req, res, next) =>{
     const individualRecipe = await Recipe.findById(req.params.id)
-    res.json({
-        "Recipe": individualRecipe,
-        "status": 208
-    })
+    res.render("displayrecipe", {individualRecipe})
+    
+    // res.json({
+    //     "Recipe": individualRecipe,
+    //     "status": 208
+    // })
     //Need to make display look good
 }
 
