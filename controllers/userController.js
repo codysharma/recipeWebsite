@@ -26,8 +26,8 @@ const createUser = async (req, res, next) => {
     const newUser = await User.create({
         name: req.body.name,
         email: req.body.email,
-            //password
-            //recipes they've liked
+        password: req.body.password,
+        recipesLiked: req.body.recipesLiked
         })
     res.json({
         "New recipe": newUser,
@@ -57,8 +57,8 @@ const updateUser =  async(req,res, next) => {
         const newData = {
             name: req.body.name,
             email: req.body.email,
-                //password
-                //recipes they've liked
+            password: req.body.password,
+            recipesLiked: req.body.recipesLiked
             }
         const updatedUser = await User.findOneAndUpdate(filter, newData, {new:true})
         res.json({

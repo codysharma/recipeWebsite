@@ -13,7 +13,7 @@ const recipeSchema = new mongoose.Schema({
     spices: {type: Array, "default": []},
     //image
     difficulty: {type: Number, max: 5, min: 0},
-    //creator - link to user model
+    author: String,
     rating: {type: Number, max: 5, min: 0}
 }, {timestamps: true})
 

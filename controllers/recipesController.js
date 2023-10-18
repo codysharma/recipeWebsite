@@ -7,6 +7,7 @@ const showAllRecipes = async (req, res, next) => {
         "Recipes Lists": allRecipes,
         "status": 200
     })
+    //Needs to become res.render("filename")
     }
     catch (error){
         next(error)
@@ -33,7 +34,7 @@ const createRecipe = async (req, res, next) => {
         spices: req.body.spices,
         //image
         difficulty: req.body.difficulty,
-        //creator - link to user model
+        author: req.body.author,
         rating: req.body.rating
     })
     res.json({
@@ -70,7 +71,7 @@ const updateRecipe =  async(req,res, next) => {
             spices: req.body.spices,
             //image
             difficulty: req.body.difficulty,
-            //creator - link to user model
+            author: req.body.author,
             rating: req.body.rating
         }
         const updatedRecipe = await Recipe.findOneAndUpdate(filter, newData, {new:true})
