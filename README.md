@@ -1,15 +1,15 @@
 ToDo by person:  
--OH Question - receiving error that route.get requires function but got object. The index one works fine, but in adding the ingredient list by id to test, this happened.  
--How do we add sub models list: in the same file: ie, we should only have recipe and user with ingredientlist somehow being typed into recipe?  
--How do we connect with the correct database collection?  
+-How do I link mulitple ingredients to one recipe? 
 Cody:  
-  
+-routers and controllers  
+-database stuff??    
+-make sure they work with postman  
   
 Linsun:  
-  
+-setting up pages and display stuff    
 
 Michelle:  
-  
+-Next week work hand off  
   
 General:  
 -create all pages with the approciate input forms  

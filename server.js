@@ -12,6 +12,8 @@ app.use(express.json())
 //Routes
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
+const recipesRouter = require('./routes/recipes')
+app.use('/recipes', recipesRouter)
 const ingredientsRouter = require('./routes/ingredients')
 app.use('/ingredients', ingredientsRouter)
 
