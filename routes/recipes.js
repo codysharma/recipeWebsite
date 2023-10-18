@@ -5,9 +5,13 @@ const router = express.Router()
 const Recipe = require('../models/recipe')
 
 //input links from controllers pages 
-const showAllRecipes = require('../controllers/recipesController')
+const {showAllRecipes, getRecipeById, createRecipe, deleteRecipeById, updateRecipe} = require('../controllers/recipesController')
 
-//-----Show all recipes
-router.get('/', showAllRecipes)
+//-----Routes
+router.get('/display', showAllRecipes)
+router.get('/:id', getRecipeById)
+router.post('/newrecipe', createRecipe)
+router.delete('/editrecipe/:id', deleteRecipeById)
+router.put('/editrecipe/:id', updateRecipe)
 
 module.exports = router
