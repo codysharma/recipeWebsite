@@ -2,13 +2,15 @@ const express = require('express')
 const router = express.Router()
 
 //Input models
-const IngredientList = require('../models/ingredientlist')
+const Ingredient = require('../models/ingredient')
 
 //input links from controllers pages 
-const {ingredientListById, allIngredientLists} = require('../controllers/ingredientsController')
+const {ingredientById, allIngredients, createIngredient, deleteIngredientById} = require('../controllers/ingredientsController')
 
 //-----Show individual ingredient list by ID
-router.get('/', allIngredientLists)
+router.get('/', allIngredients)
+router.post('/', createIngredient)
+router.delete('/:id', deleteIngredientById)
 // router.get('/:id', ingredientListById)
 
 module.exports = router

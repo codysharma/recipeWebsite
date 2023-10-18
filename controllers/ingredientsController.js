@@ -1,9 +1,9 @@
-const IngredientList = require('../models/ingredientlist')
+const Ingredient = require('../models/ingredient')
 
-const ingredientListById = async (req, res) =>{
-    const individualIngredientList = await IngredientList.findById(req.params.id)
+const ingredientById = async (req, res) =>{
+    const individualIngredient = await Ingredient.findById(req.params.id)
     res.json({
-        "ingredient list": individualIngredientList,
+        "ingredient list": individualIngredient,
         "status": 203
     })
     
@@ -11,15 +11,34 @@ const ingredientListById = async (req, res) =>{
     // res.render("/", {individualIngredientList})
 }
 
-const allIngredientLists = async (req, res) => {
-    const ingredientsListTotal = await IngredientList.find()
+const allIngredients = async (req, res) => {
+    const ingredientsListTotal = await Ingredient.find()
     res.json({
-        "Ingredient Lists": ingredientsListTotal,
+        "Ingredients": ingredientsListTotal,
         "status": 200
     })
 }
 
+const createIngredient = async (req, res) => {
+        const newIngredient = await Ingredient.create({
+        name: req.body.name,
+        image: req.body.image
+    })
+    res.json({
+        "New ingredient": newIngredient
+    })
+}
+
+const deleteIngredientById = async (req, res) => {
+    await Ingredient.findByIdAndDelete({_id: req.params.id})
+    res.json({
+        "message": "Successfully deleted"
+    })
+}
+
 module.exports = {
-    ingredientListById, 
-    allIngredientLists
+    ingredientById, 
+    allIngredients,
+    createIngredient,
+    deleteIngredientById
 }
