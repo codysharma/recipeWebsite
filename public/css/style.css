@@ -1,0 +1,41 @@
+body {
+    background-color: rgba(252, 250, 195, 0.795);
+}
+
+header {
+    border: 5px solid black;
+    padding: 5px;
+    font-family: 'Courgette', cursive;
+}
+
+#website-title {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Pacifico', cursive;
+}
+
+#login-header {
+    position: absolute;
+    /* padding: 50px; */
+    right: 25px;
+    font-size: 20px;
+}
+
+#recipes-header {
+    padding: 10px;
+    font-size: 20px;
+}
+
+#home-header {
+    padding: 10px;
+    font-size: 20px;
+}
+
+#recipes-home-button {
+    text-align: center;
+}
+
+#login-home-button {
+    text-align: center;
+}
+

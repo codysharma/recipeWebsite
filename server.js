@@ -4,6 +4,9 @@ const ejsLayouts = require('express-ejs-layouts')
 const mongoose = require('mongoose')
 const {connectionString, port} = require('./db/connection');
 
+//connection to styling
+app.use('/public', express.static('public'));
+
 //middleware - has to be before routes
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
