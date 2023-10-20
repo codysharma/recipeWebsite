@@ -3,7 +3,7 @@ const Liked = require('./liked')
 
 const userSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    email: {type: String, required: true}, 
+    email: {type: String, required: true, unique: true}, 
     password: String,
     recipesLiked: [{type: mongoose.Schema.Types.ObjectId, ref: "Liked"}]
 }, {timestamps: true})

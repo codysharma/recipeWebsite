@@ -6,3 +6,6 @@ Login:
 -Need view for login.
 --After login or create user, change the header appropriately. Change the individual recipes pages to allow edit/delete only for author
 -Need view for create user. Route POST with this one, then give a json web token as cookie.
+
+ToDo:  
+-Allow gte recipes by userID?  

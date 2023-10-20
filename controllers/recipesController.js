@@ -61,7 +61,7 @@ const deleteRecipeById = async (req, res, next) => {
     }
 }
 
-const updateRecipe =  async(req,res, next) => {
+const updateRecipe = async(req, res, next) => {
     try {
         const filter = {_id: req.params.id}
         const newData =  {
@@ -87,10 +87,15 @@ const updateRecipe =  async(req,res, next) => {
     }
 }
 
+const sendNewRecipeForm = async(req, res, next) => {
+    res.render("createrecipe")
+}
+
 module.exports = {
     showAllRecipes,
     getRecipeById,
     createRecipe,
     deleteRecipeById,
-    updateRecipe
+    updateRecipe,
+    sendNewRecipeForm
 }
