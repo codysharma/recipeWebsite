@@ -12,47 +12,52 @@ header {
     text-align: center;
     font-size: 50px;
     font-family: 'Pacifico', cursive;
+    top: -25px;
+    position: relative;
 }
 
 #login-header {
     position: absolute;
-    /* padding: 50px; */
     right: 25px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #recipes-header {
     padding: 10px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 #home-header {
     padding: 10px;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .recipes-home-button {
     text-align: center;
-    width: 200px;
-    height: 60px;
+    width: 345px;
+    height: 130px;
     border-radius: 100%;
     font-family: 'Courgette', cursive;
-    font-size: 40px;
+    font-size: 78px;
+    cursor: pointer;
 }
 
 .login-home-button {
     text-align: center;
-    width: 200px;
-    height: 60px;
+    width: 345px;
+    height: 130px;
     border-radius: 100%;
     font-family: 'Courgette', cursive;
-    font-size: 40px;
+    font-size: 78px;
+    cursor: pointer;
 }
 
 .home-buttons {
     display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    top: -50px;
+    position: relative;
 }
