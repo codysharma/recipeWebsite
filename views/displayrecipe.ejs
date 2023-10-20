@@ -1,0 +1,36 @@
+<%= individualRecipe %>
+<h2><%= individualRecipe.title %></h2> By: <%= individualRecipe.author %>
+<br>
+<!-- Move the author name to inline with title -->
+Difficulty: <%= individualRecipe.difficulty %>
+<!-- Turn the following into some pretty table format? -->
+<ul>Equipment needed: 
+<% individualRecipe.equipment.forEach((item) => { %>
+<li><%= item %></li>
+<% }) %>
+</ul>
+<br>
+<ul>Ingredients needed:
+<% individualRecipe.requiredIngredients.forEach((item) => { %>
+    <li><%= item %></li>
+    <% }) %>
+<br>
+</ul>
+<ul>Optional ingredients:
+    <% individualRecipe.optionalIngredients.forEach((item) => { %>
+        <li><%= item %></li>
+        <% }) %>
+    <br>
+    </ul>
+<ul>Spices used:
+<% individualRecipe.spices.forEach((item) => { %>
+    <li><%= item %></li>
+    <% }) %>
+<br>
+</ul>
+<ol>
+Directions:
+<% individualRecipe.instructions.forEach((item) => { %>
+    <li><%= item %></li>
+    <% }) %>
+</ol>
