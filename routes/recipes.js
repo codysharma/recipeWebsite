@@ -17,11 +17,12 @@ const checkAuth = require('../middleware/checkauth')
 
 //-----Routes
 router.get('/display', showAllRecipes)
+router.get('/createrecipe', sendNewRecipeForm)
 router.get('/:id', getRecipeById)
+//router.get('/users/:id) to show all recipes by user id?
 //Authorization checkpoint
 router.use(checkAuth)
-router.get('/newrecipe', sendNewRecipeForm)
-router.post('/newrecipe', createRecipe)
+router.post('/createrecipe', createRecipe)
 router.delete('/editrecipe/:id', deleteRecipeById)
 router.put('/editrecipe/:id', updateRecipe)
 
