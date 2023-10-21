@@ -16,16 +16,19 @@ const {
     logIn,
     logOut
 } = require('../controllers/userController')
+const checkAuth = require('../middleware/checkauth')
 
 //--------Routes
 router.get('/display', showAllUsers)
-router.get('/:id', getUserById)
-router.get('/new', sendNewUserForm)
+router.get('/signup', sendNewUserForm)
 router.get('/login', sendLogInForm)
 router.get('/logout', logOut)
-//authentication checkpoint
 router.post('/login', logIn)
-router.post('/newuser', createUser)
+router.post('/signup', createUser)
+router.get('/:id', getUserById)
+router.use(checkAuth)
+//authentication checkpoint
+// router.get('/:id', getUserById)
 router.delete('/edituser/:id', deleteUserById)
 router.put('/edituser/:id', updateUser)
 

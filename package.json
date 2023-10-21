@@ -1,11 +1,13 @@
 {
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
     "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^3.1.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.2"
   },
@@ -18,6 +20,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {}
+  "description": ""
 }
