@@ -6,6 +6,10 @@ const {connectionString, port} = require('./db/connection');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
+
+//connection to styling
+app.use('/public', express.static('public'));
+
 //middleware - has to be before routes
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
