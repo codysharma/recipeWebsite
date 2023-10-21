@@ -6,6 +6,7 @@ const {connectionString, port} = require('./db/connection');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
+
 //connection to styling
 app.use('/public', express.static('public'));
 
