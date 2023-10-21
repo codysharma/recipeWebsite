@@ -1,8 +1,9 @@
 Questions:
--How do I query data within the ejs template? For instance, each recipe has the author id tied to it. How do I have it display the "name" of the id rather than the id#?  
---Or if one field has nothing, display "none" or omit altogether?
+-In trying to submit createrecipe form as POST to recipes/createrecipe route, receive the error: JsonWebTokenError: secretOrPublicKey is not valid key material.  
+Also receving when trying to get to the "editrecipe" form  
 
-Login:
--Need view for login.
---After login or create user, change the header appropriately. Change the individual recipes pages to allow edit/delete only for author
--Need view for create user. Route POST with this one, then give a json web token as cookie.
+
+ToDo:  
+-Make the edit/delete buttons on recipes and users hidden/shown based on userId  
+-Test delete recipe button on recipes
+-Allow get recipes by userID?  

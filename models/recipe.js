@@ -19,25 +19,25 @@ const recipeSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 //prehooks - mongoose doesn't do arrow functions. No no.
-recipeSchema.pre(["findOne", "find", "findById"], function(next){
-    this.populate("author")
-    next()
-})
+// recipeSchema.pre(["findOne", "find", "findById"], function(next){
+//     this.populate("author")
+//     next()
+// })
 
 //creating instance method that allows us to only show/pull part of user model
-recipeSchema.methods.censoredName = function(){
-    return {
-        title: this.title,
-        equipment: this.equipment,
-        instructions: this.instructions,
-        requiredIngredients: this.requiredIngredients,
-        optionalIngredients: this.optionalIngredients,
-        spices: this.spices,
-        difficlty: this.difficulty,
-        author: this.author.nameOnly(),//using instance method from user.js model to pass non-sensitive info
-        rating: this.rating
-    }
-}
+// recipeSchema.methods.censoredName = function(){
+//     return {
+//         title: this.title,
+//         equipment: this.equipment,
+//         instructions: this.instructions,
+//         requiredIngredients: this.requiredIngredients,
+//         optionalIngredients: this.optionalIngredients,
+//         spices: this.spices,
+//         difficlty: this.difficulty,
+//         author: this.author.nameOnly(),//using instance method from user.js model to pass non-sensitive info
+//         rating: this.rating
+//     }
+// }
 
 const Recipe = mongoose.model('Recipe', recipeSchema)
 module.exports = Recipe
