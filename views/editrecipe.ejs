@@ -1,0 +1,33 @@
+<h2>Edit Recipe Page</h2>
+
+<form class="editRecipe" method="PUT" action="/recipes/editrecipe/<%= individualRecipe.id%>"> 
+    <label for="title">Name of recipe: </label>
+    <input id="title" type="text" name="title" value="<%= individualRecipe.title %>">
+
+    <label for="equipment">Equipment needed: </label>
+    <input id="equipment" type="text" name="equipment" value="<%= individualRecipe.equipment %>">
+
+    <label for="instructions">List step by step instructions, with each step separated by periods. </label>
+    <input id="instructions" type="textArea" name="instructions" rows="5" columns="60"  value="<%= individualRecipe.instructions %>">
+
+    <label for="requiredIngredients">Required ingredients, separating each with a comma: </label>
+    <input id="requiredIngredients" type="textArea" name="requiredIngredients" rows="3" columns="40" value="<%= individualRecipe.requiredIngredients %>">
+
+    <label for="optionalIngredients">Optional ingredients, separating each with a comma: </label>
+    <input id="optionalIngredients" type="text" name="optionalIngredients" value="<%= individualRecipe.optionalIngredients %>">
+
+    <label for="spices">List spices used, separating each with a comma: </label>
+    <input id="spices" type="text" name="spices" value="<%= individualRecipe.spices %>">
+
+    <label for="difficulty">Difficulty rating: </label>
+    <input id="difficulty" type="range" name="difficulty" min="1" max="5" value="<%= individualRecipe.difficulty %>">
+
+    <label for="author">Author </label>
+    <input id="author" type="text" name="author"  value="<%= individualRecipe.author %>">
+    
+    <input type="submit" value="submit">
+</form>
+
+<form action="/recipes/editrecipe/<%= individualRecipe.id%>" method="DELETE" >
+    <input type="submit" value="Delete Recipe">  
+</form> 

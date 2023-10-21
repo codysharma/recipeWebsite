@@ -3,6 +3,8 @@ const app = express()
 const ejsLayouts = require('express-ejs-layouts')
 const mongoose = require('mongoose')
 const {connectionString, port} = require('./db/connection');
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 //connection to styling
 app.use('/public', express.static('public'));
@@ -11,6 +13,10 @@ app.use('/public', express.static('public'));
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 app.use(express.json())
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 
 //Routes
 const indexRouter = require('./routes/index')

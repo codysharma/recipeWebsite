@@ -1,0 +1,16 @@
+<h2>User list</h2>
+<!-- <%= allUsers %> -->
+
+<ul id="usersIndex">
+    <% for(let i = 0; i < allUsers.length; i++) {
+        let userNumber = i + 1
+        %>
+
+    <li>
+        <a class="usersLink" href="/users/<%= allUsers[i].id %>"> <%= allUsers[i].name %> </a>
+        
+    </li>   
+
+   <% } %>
+   <button><a href="/users/signup">Create new user</a></button>
+</ul>

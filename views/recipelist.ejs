@@ -1,0 +1,11 @@
+<h2>Recipes list</h2>
+<ul id="recipesIndex">
+    <% for(let i = 0; i < allRecipes.length; i++) {
+        let recipeNumber = i + 1
+        %>
+
+    <li>
+        <a class="recipeLink" href="/recipes/<%= allRecipes[i].id %>"> <%= allRecipes[i].title %></a>   
+    </li>   
+   <% } %>
+<button><a href="/recipes/createrecipe">Create New Recipe</a></button>
