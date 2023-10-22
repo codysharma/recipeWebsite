@@ -1,6 +1,6 @@
 const Recipe = require('../models/recipe')
 const User = require('../models/user')
-const{JWT_KEY_SECRET} = require('../config')
+const JWT_KEY_SECRET = require('../config').JWT_KEY_SECRET;
 
 //authentication libraries
 const bcrypt = require('bcryptjs')

@@ -1,9 +1,10 @@
 const User = require('../models/user')
-const{JWT_KEY_SECRET} = require('../config')
+const JWT_KEY_SECRET = require('../config').JWT_KEY_SECRET;
+
 
 //authentication libraries
-const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 //---------------functions for routes
 const showAllUsers = async (req, res, next) => {
