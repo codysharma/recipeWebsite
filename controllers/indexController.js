@@ -11,6 +11,6 @@ function index(req, res){
         userId = decodedToken.userId
     }
 
-    res.render("index", isLoggedIn, pathText, linkText);
+    res.render("index", { isLoggedIn, pathText, linkText });
 }
 module.exports = index
