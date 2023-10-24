@@ -26,12 +26,14 @@ Difficulty: <%= individualRecipe.difficulty %>
 <% individualRecipe.spices.forEach((item) => { %>
     <li><%= item %></li>
     <% }) %>
-<br>
+ <br>
 </ul>
+
 <ol>
 Directions:
 <% individualRecipe.instructions.forEach((item) => { %>
-    <li><%= item %></li>
+
+    <br><%= item %><br>
     <% }) %>
 </ol>
 
