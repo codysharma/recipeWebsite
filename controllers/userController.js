@@ -49,7 +49,6 @@ const getUserById = async (req, res, next) =>{
     // })
 }
 
-//new user form
 const sendNewUserForm = async (req, res, next) => {
     let isLoggedIn = !!req.cookies.acces_token
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up"
@@ -58,7 +57,6 @@ const sendNewUserForm = async (req, res, next) => {
     res.render("signup", {isLoggedIn, linkText, pathText})
 }
 
-//Create new user
 const createUser = async (req, res, next) => {
     //loops through each piece of info in requiredFields to check for empty field
     const requiredFields = ["name", "email", "password"]
@@ -138,7 +136,11 @@ const sendLogInForm = async(req, res, next) => {
     if(req.cookies.access_token) {
         isLoggedIn = true
     } 
-    res.render('login', {isLoggedIn, linkText, pathText})
+    let messageAlreadyLoggedIn = ""
+    if (isLoggedIn === true) {
+        messageAlreadyLoggedIn = "No need - you're already logged in!"
+    }
+    res.render('login', {isLoggedIn, linkText, pathText, messageAlreadyLoggedIn})
 }
 
 const logIn = async(req, res, next) => {

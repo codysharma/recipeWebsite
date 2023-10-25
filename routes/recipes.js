@@ -11,7 +11,8 @@ const {
     createRecipe, 
     deleteRecipeById, 
     updateRecipe,
-    sendNewRecipeForm
+    sendNewRecipeForm,
+    sendEditRecipeForm
 } = require('../controllers/recipesController')
 const checkAuth = require('../middleware/checkauth')
 
@@ -23,7 +24,8 @@ router.get('/:id', getRecipeById)
 //Authorization checkpoint
 router.use(checkAuth)
 router.post('/createrecipe', createRecipe)
-router.delete('/editrecipe/:id', deleteRecipeById)
-router.put('/editrecipe/:id', updateRecipe)
+router.get('/:id/editrecipe', sendEditRecipeForm)
+router.put('/:id/editrecipe', updateRecipe)
+router.delete('/:id', deleteRecipeById)
 
 module.exports = router

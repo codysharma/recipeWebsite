@@ -14,9 +14,10 @@ const {
     updateUser,
     sendLogInForm,
     logIn,
-    logOut
+    logOut,
 } = require('../controllers/userController')
 const checkAuth = require('../middleware/checkauth')
+const { getRecipesByUserId } = require('../controllers/recipesController')
 
 //--------Routes
 router.get('/display', showAllUsers)
@@ -25,6 +26,7 @@ router.get('/login', sendLogInForm)
 router.get('/logout', logOut)
 router.post('/login', logIn)
 router.post('/signup', createUser)
+router.get('/recipes/:id', getRecipesByUserId)
 router.get('/:id', getUserById)
 router.use(checkAuth)
 //authentication checkpoint
