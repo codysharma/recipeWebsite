@@ -19,10 +19,6 @@ const showAllUsers = async (req, res, next) => {
         isLoggedIn = true
     }
     res.render("userlist", {allUsers, isLoggedIn, linkText, pathText})
-    // res.json({
-    //     "All Users": allUsers,
-    //     "status": 210
-    // })
     }
     catch (error){
         next(error)
@@ -44,10 +40,6 @@ const getUserById = async (req, res, next) =>{
     catch (error) {
         next(error)
     }
-    // res.json({
-    //     "User Info": individualUser,
-    //     "status": 214
-    // })
 }
 
 const sendNewUserForm = async (req, res, next) => {
@@ -85,7 +77,7 @@ const createUser = async (req, res, next) => {
         const token = jwt.sign(
             {userId: usr.id, email: usr.email},
             JWT_KEY_SECRET,
-            {expiresIn: '5hr'}
+            // {expiresIn: '5hr'}
         )
 
         //log user in and redirect them to general page. 
@@ -142,6 +134,7 @@ const sendUpdateUserForm = async(req, res, next) => {
         next (error)
     }
 }
+
 const updateUser =  async(req,res, next) => { 
     try {
         const filter = {_id: req.params.id}
@@ -188,7 +181,7 @@ const logIn = async(req, res, next) => {
         const token = jwt.sign(
             {userId: usr.id, email: usr.email},
             JWT_KEY_SECRET,
-            {expiresIn: '5hr'}
+            // {expiresIn: '5hr'}
         )
         return res.cookie("access_token", token).redirect('/recipes/display')
     } catch (error) {
@@ -197,19 +190,18 @@ const logIn = async(req, res, next) => {
 }
 
 const logOut = async (req, res, next) => {
-    console.log("error1");
     let isLoggedIn = false;
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
     let pathText = isLoggedIn ? "logout" : "login";
 
-    const token = req.cookies.acces_token
+    const token = req.cookies.access_token
     // console.log(token);
     // if (!token) {
     //     return res.send("Failed to logout due to token issue")
     // }
     // const data = jwt.verify(token, JWT_KEY_SECRET)
     // console.log(data);
-    return res.clearCookie("access_token").redirect('/users/login', {isLoggedIn, linkText, pathText})
+    return res.clearCookie("access_token").redirect('/users/login')
 }
 
 module.exports = {

@@ -13,6 +13,7 @@ const {
     updateRecipe,
     sendNewRecipeForm,
     sendEditRecipeForm,
+    showRecipesByUser,
     getRecipesByUserId
 } = require('../controllers/recipesController')
 const checkAuth = require('../middleware/checkauth')
@@ -20,8 +21,9 @@ const checkAuth = require('../middleware/checkauth')
 //-----Routes
 router.get('/display', showAllRecipes)
 router.get('/createrecipe', sendNewRecipeForm)
+router.get('/byusers', showRecipesByUser) 
 router.get('/:id', getRecipeById)
-router.get('/users/:id', getRecipesByUserId) 
+router.get('/users/:id', getRecipesByUserId)
 //Authorization checkpoint
 router.use(checkAuth)
 router.post('/createrecipe', createRecipe)

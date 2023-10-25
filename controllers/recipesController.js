@@ -7,8 +7,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const jwt_decode = require('jwt-decode')
 
-
-
+//Route functions
 const showAllRecipes = async (req, res, next) => {
     let isLoggedIn = !!req.cookies.access_token;
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
@@ -28,10 +27,6 @@ const showAllRecipes = async (req, res, next) => {
         linkText,
         pathText,
     });   
-    // res.json({
-    //     "Recipes Lists": allRecipes,
-    //     "status": 200
-    // })
     }
     catch (error){
         next(error)
@@ -39,7 +34,6 @@ const showAllRecipes = async (req, res, next) => {
 }
 
 const getRecipeById = async (req, res, next) =>{
-    // console.log("Line 38", req.params);
     let isLoggedIn = false 
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
     let pathText = isLoggedIn ? "logout" : "login";
@@ -55,8 +49,9 @@ const getRecipeById = async (req, res, next) =>{
         const decodedToken = jwt.verify(req.cookies.access_token, JWT_KEY_SECRET)
         userId = decodedToken.userId
     }
+    // const author = await User.findById(req.params.id)
+
     // const showButtons = userId && userId.toString() === story.author.id.toString()
-    // res.render("displayrecipe", {individualRecipe, isLoggedIn, userId, linkText, pathText, showButtons})
     res.render("displayrecipe", {individualRecipe, isLoggedIn, linkText, pathText})
 }
 
@@ -77,16 +72,13 @@ const createRecipe = async (req, res, next) => {
         return res.send(error);
     }
 }
-
+        
+//to be edited, so recipe can only be deleted by creater
 const deleteRecipeById = async (req, res, next) => {
     try {
-        console.log("error1");
         await Recipe.findByIdAndDelete({_id: req.params.id})
-        //to be added back, so recipe can only be deleted by creater
     // if (Recipe.author.id === userId) {
-    //     console.log("error2");
     //     await Recipe.findByIdAndDelete({_id: req.params.id})
-    //     console.log("Deleted story");
     //     res.redirect('recipes/display')
     // } else {
     //     console.log("cannot do");
@@ -190,15 +182,27 @@ const sendNewRecipeForm = async(req, res, next) => {
     }
 }
 
+const showRecipesByUser = async(req, res, next) => {
+    let isLoggedIn = !!req.cookies.access_token
+    let linkText = isLoggedIn ? "Logout" : "Login/Sign Up"
+    let pathText = isLoggedIn ? "logout" : "login"
+
+    try {
+    const allUsers = await User.find()
+    res.render('recipesbyuser', {allUsers, isLoggedIn, linkText, pathText})
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getRecipesByUserId = async(req, res, next) => {
     let isLoggedIn = !!req.cookies.access_token
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up"
     let pathText = isLoggedIn ? "logout" : "login"
  
     const recipes = await Recipe.find({author: req.params.id})
-    // const author = await User.find(req.params.id)
-    const individualUser = await User.findById(req.params.id)
-    res.render("userrecipes", {recipes, individualUser, isLoggedIn, linkText, pathText})
+    const author = await User.findById(req.params.id)
+    res.render("userrecipes", {recipes, author, isLoggedIn, linkText, pathText})
 
 }
 
@@ -210,5 +214,6 @@ module.exports = {
     updateRecipe,
     sendNewRecipeForm,
     sendEditRecipeForm,
+    showRecipesByUser,
     getRecipesByUserId
 }

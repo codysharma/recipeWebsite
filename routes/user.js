@@ -24,16 +24,17 @@ const { getRecipesByUserId } = require('../controllers/recipesController')
 router.get('/display', showAllUsers)
 router.get('/signup', sendNewUserForm)
 router.get('/login', sendLogInForm)
+router.post('/login', logIn)
 router.get('/recipes/:id', getRecipesByUserId)
+router.get('/logout', logOut)
+router.post('/signup', createUser)
 router.get('/:id', getUserById)
 router.use(checkAuth)
 //authentication checkpoint
 // router.get('/:id', getUserById)
-router.post('/login', logIn)
-router.post('/signup', createUser)
 router.delete('/edituser/:id', deleteUserById)
 router.get('/edituser/:id', sendUpdateUserForm)
 router.put('/edituser/:id', updateUser)
-router.get('/logout', logOut)
+
 
 module.exports = router
