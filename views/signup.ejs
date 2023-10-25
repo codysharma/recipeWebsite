@@ -1,15 +1,25 @@
-<h2>Sign Up Page</h2>
-
+<div class="sign-up-page">
+    <div class="sign-up-title">
+        <h2>Sign Up</h2>
+    </div>
 <form class="signup" method="POST" action="/users/signup"> 
-    <label for="name">Enter full name: </label>
-    <input id="name" type="text" name="name">
-
-    <label for="email">Enter email address: </label>
-    <input id="email" type="email" name="email">
-
-    <label for="password">Create your password: </label>
-    <input id="password" type="password" name="password">
-
-    <input type="submit" value="submit">
-    or <a href="./login.ejs">Login</a>
+    <div class="form-group">
+        <label for="name">Enter full name: </label>
+        <input id="name" type="text" name="name">
+    </div>
+    <div class="form-group">
+        <label for="email">Enter email address: </label>
+        <input id="email" type="email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="password">Create your password: </label>
+        <input id="password" type="password" name="password">
+    </div>
+    <div class="submit-button-container">
+        <input type="submit" value="submit">
+    </div>
 </form>
+    <div class="login-link">
+        <p>Already a Member?<a href="/users/Login">Login</a></p>
+    </div>
+</div>
