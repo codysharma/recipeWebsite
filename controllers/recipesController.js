@@ -14,6 +14,10 @@ const showAllRecipes = async (req, res, next) => {
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
     let pathText = isLoggedIn ? "logout" : "login";
 
+    let decodeCookie = jwt_decode(req.cookies.access_token)
+    const userId = decodeCookie.userId
+    const loggedInUser = await User.findById(userId)
+
     try {
     const allRecipes = await Recipe.find();
     const allUsers = await User.find()
@@ -76,6 +80,7 @@ const createRecipe = async (req, res, next) => {
 
 const deleteRecipeById = async (req, res, next) => {
     try {
+        console.log("error1");
         await Recipe.findByIdAndDelete({_id: req.params.id})
         //to be added back, so recipe can only be deleted by creater
     // if (Recipe.author.id === userId) {
@@ -189,9 +194,12 @@ const getRecipesByUserId = async(req, res, next) => {
     let isLoggedIn = !!req.cookies.access_token
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up"
     let pathText = isLoggedIn ? "logout" : "login"
-    let userId = null
-
+ 
     const recipes = await Recipe.find({author: req.params.id})
+    // const author = await User.find(req.params.id)
+    const individualUser = await User.findById(req.params.id)
+    res.render("userrecipes", {recipes, individualUser, isLoggedIn, linkText, pathText})
+
 }
 
 module.exports = {

@@ -5,6 +5,7 @@ const JWT_KEY_SECRET = require('../config').JWT_KEY_SECRET;
 //authentication libraries
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const jwt_decode = require('jwt-decode')
 
 //---------------functions for routes
 const showAllUsers = async (req, res, next) => {
@@ -60,7 +61,6 @@ const sendNewUserForm = async (req, res, next) => {
 const createUser = async (req, res, next) => {
     //loops through each piece of info in requiredFields to check for empty field
     const requiredFields = ["name", "email", "password"]
-    console.log("req.body ", req.body);
 
     for (let field of requiredFields) {
         if (!(field in req.body)) {
@@ -95,33 +95,59 @@ const createUser = async (req, res, next) => {
         next(error)
     }
 }
-//how will this change after using bcrypt?
+
 const deleteUserById = async (req, res, next) => {
+    let isLoggedIn = false
+    let linkText = isLoggedIn ? "Logout" : "Login/Sign Up"
+    let pathText = isLoggedIn ? "Logout" : "Login"
+ 
     try {
-    await User.findByIdAndDelete({_id: req.params.id})
-    res.json({
-        "message": "User successfully deleted"
-    })
+        await User.findByIdAndDelete({_id: req.params.id})
     }
-    catch (error){
+    catch (error) {
         next(error)
     }
+    res.render("deleteduser", {isLoggedIn, linkText, pathText})
 }
-//how will this change after using bcrypt?
-const updateUser =  async(req,res, next) => {
+
+const sendUpdateUserForm = async(req, res, next) => {
+    let isLoggedIn = !! req.cookies.access_token
+    //dynamic text to change on DOM based on login status
+    let linkText = isLoggedIn ? "Logout" : "Login/Sign Up"
+    //more concise syntax instead of "if" tree
+    let pathText = isLoggedIn ? "logout" : "login"
+
+    if (!req.cookies.access_token) {
+        console.log("no cookie found")
+        return res.redirect("/users/login")
+    } else {
+        isLoggedIn = true
+    }
+
+    let decodeCookie = jwt_decode(req.cookies.access_token)
+    const userId = decodeCookie.userId
+
+    const individualUser = await User.findById(req.params.id)
+
+    try {
+        res.render("edituser", {
+            userId,
+            individualUser, 
+            isLoggedIn, 
+            linkText, 
+            pathText
+        })
+    }
+    catch (error) {
+        next (error)
+    }
+}
+const updateUser =  async(req,res, next) => { 
     try {
         const filter = {_id: req.params.id}
-        const newData = {
-            name: req.body.name,
-            email: req.body.email,
-            // password: req.body.password,
-            recipesLiked: req.body.recipesLiked
-            }
+        const newData = req.body
         const updatedUser = await User.findOneAndUpdate(filter, newData, {new:true})
-        // res.json({
-        //     "Updated Recipe": updatedUser,
-        //     "status": 212
-        // })
+        res.redirect("/recipes/display")
     }
     catch (error) {
         next(error)
@@ -171,14 +197,19 @@ const logIn = async(req, res, next) => {
 }
 
 const logOut = async (req, res, next) => {
+    console.log("error1");
+    let isLoggedIn = false;
+    let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
+    let pathText = isLoggedIn ? "logout" : "login";
+
     const token = req.cookies.acces_token
-    console.log(token);
+    // console.log(token);
     // if (!token) {
     //     return res.send("Failed to logout due to token issue")
     // }
     // const data = jwt.verify(token, JWT_KEY_SECRET)
-
-    return res.clearCookie("access_token").redirect('/users/login')
+    // console.log(data);
+    return res.clearCookie("access_token").redirect('/users/login', {isLoggedIn, linkText, pathText})
 }
 
 module.exports = {
@@ -190,5 +221,6 @@ module.exports = {
     updateUser,
     sendLogInForm,
     logIn,
-    logOut
+    logOut,
+    sendUpdateUserForm,
 }

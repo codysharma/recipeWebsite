@@ -1,0 +1,9 @@
+<h2>Recipes by <%=individualUser.name %></h2>
+
+
+    <% for(let i = 0; i < recipes.length; i++) {
+        let recipeNumber = i + 1
+        %>
+    <li><a class="recipeLink" href="/recipes/<%= recipes[i].id %>" ><%= recipes[i].title %></a></li>
+    <% } %>
+    </ul>
