@@ -1,13 +1,22 @@
-<h2>Login page</h2>
-<%= messageAlreadyLoggedIn%>
-<br>
+<div class="login-page">
+    <div class="login-title">
+        <h2>Login</h2>
+        <%= messageAlreadyLoggedIn%>
+    </div>
 <form class="login" method="POST" action="/users/login">
-        <label for="email" >e-mail</label>
+    <div class="form-group">
+        <label for="email" >Email</label>
         <input id="email" type="email" name="email">
-
+    </div>
+    <div class="form-group">
         <label for="password">Password</label>
         <input id="password" type="password" name="password">
-
-    <input type="submit" value="Submit">
-
-<button><a href="/users/signup">Create new user</a></button>
+    </div>
+    <div class="submit-button-container">
+        <input type="submit" value="Login" class="submit-button">
+    </div>
+</form>
+<div class="signup-link">
+    <p>Not a Member? <a href="/users/signup">Sign Up!</a></p>
+</div>
+</div>
