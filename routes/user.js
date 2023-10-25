@@ -14,22 +14,26 @@ const {
     updateUser,
     sendLogInForm,
     logIn,
-    logOut
+    logOut,
+    sendUpdateUserForm,
 } = require('../controllers/userController')
 const checkAuth = require('../middleware/checkauth')
+const { getRecipesByUserId } = require('../controllers/recipesController')
 
 //--------Routes
 router.get('/display', showAllUsers)
 router.get('/signup', sendNewUserForm)
 router.get('/login', sendLogInForm)
-router.get('/logout', logOut)
 router.post('/login', logIn)
+router.get('/recipes/:id', getRecipesByUserId)
+router.get('/logout', logOut)
 router.post('/signup', createUser)
 router.get('/:id', getUserById)
 router.use(checkAuth)
 //authentication checkpoint
 // router.get('/:id', getUserById)
 router.delete('/edituser/:id', deleteUserById)
+router.get('/edituser/:id', sendUpdateUserForm)
 router.put('/edituser/:id', updateUser)
 
 

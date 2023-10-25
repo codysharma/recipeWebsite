@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const JWT_KEY_SECRET = require('../config')
+const {JWT_KEY_SECRET} = require('../config')
 
 const checkAuth = (req, res, next) => {
     try {
