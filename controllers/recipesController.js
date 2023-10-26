@@ -122,26 +122,37 @@ const deleteRecipeById = async (req, res, next) => {
     res.redirect("display")
 }
 
-const updateRecipe = async(req, res, next) => {
+const updateRecipe = async (req, res, next) => {
     const requiredFields = ["title", "equipment", "instructions", "requiredIngredients"];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
-        const errorMessage = `missing ${field} in request body`;
-        console.error(errorMessage);
-        return res.send(errorMessage);
+            const errorMessage = `missing ${field} in request body`;
+            console.error(errorMessage);
+            return res.send(errorMessage);
         }
     }
 
     try {
-        const filter = {_id: req.params.id}
-        const newData = req.body//will this actually save as an object with the correct pairs?
-        const updatedRecipe = await Recipe.findOneAndUpdate(filter, newData, {new:true});
-        res.redirect("/recipes/display");//change this to show the recipe just created?
+        const filter = { _id: req.params.id };
+
+        // Exclude author field from newData object
+        const newData = {
+            title: req.body.title,
+            equipment: req.body.equipment,
+            instructions: req.body.instructions,
+            requiredIngredients: req.body.requiredIngredients,
+            // ... other fields ...
+            // Exclude author field to prevent modification
+        };
+
+        const updatedRecipe = await Recipe.findOneAndUpdate(filter, newData, { new: true });
+        res.redirect("/recipes/display"); // Change this to the appropriate redirect URL
     } catch (error) {
-        return res.send(error);
+        console.error(error);
+        return res.status(500).send('Internal Server Error');
     }
-}
+};
 
 const sendEditRecipeForm = async(req, res, next) => {
     let isLoggedIn = !! req.cookies.access_token
