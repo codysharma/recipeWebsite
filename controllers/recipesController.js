@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Recipe = require('../models/recipe')
 const User = require('../models/user')
 const {JWT_KEY_SECRET} = require('../config');
@@ -33,27 +34,58 @@ const showAllRecipes = async (req, res, next) => {
     }
 }
 
-const getRecipeById = async (req, res, next) =>{
-    let isLoggedIn = false 
-    let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
-    let pathText = isLoggedIn ? "logout" : "login";
-    // let userId = null
 
-    const individualRecipe = await Recipe.findById(req.params.id)
+
+const getRecipeById = async (req, res, next) => {
+    let isLoggedIn = false;
+    let linkText = "Login/Sign Up";
+    let pathText = "login";
+    let userId = null;
+
     if (req.cookies.access_token) {
-        isLoggedIn = true
-
-        linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
-        pathText = isLoggedIn ? "logout" : "login";
-
-        const decodedToken = jwt.verify(req.cookies.access_token, JWT_KEY_SECRET)
-        userId = decodedToken.userId
+        try {
+            const decodedToken = jwt.verify(req.cookies.access_token, JWT_KEY_SECRET);
+            userId = decodedToken.userId;
+            isLoggedIn = true;
+            linkText = "Logout";
+            pathText = "logout";
+        } catch (error) {
+            // Handle token verification error, if any
+            console.error(error);
+        }
     }
-    // const author = await User.findById(req.params.id)
 
-    // const showButtons = userId && userId.toString() === story.author.id.toString()
-    res.render("displayrecipe", {individualRecipe, isLoggedIn, linkText, pathText})
-}
+    try {
+        const individualRecipe = await Recipe.findById(req.params.id);
+
+        if (!individualRecipe.author) {
+            // Handle case where the author property is undefined
+            console.log("Author: undefined");
+            console.log("UserId:", userId);
+            res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor: false });
+            return;
+        }
+
+        console.log("Author:", individualRecipe.author);
+        console.log("UserId:", userId);
+
+        const authorIdString = individualRecipe.author.toString();
+        const isAuthor = userId === authorIdString;
+
+        console.log("IsAuthor:", isAuthor);
+        res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
+
+
+
+
 
 const createRecipe = async (req, res, next) => {
     const requiredFields = ["title", "equipment", "instructions", "requiredIngredients"]
