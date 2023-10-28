@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Recipe = require('../models/recipe')
 const JWT_KEY_SECRET = require('../config').JWT_KEY_SECRET;
 
 
@@ -32,13 +33,22 @@ const getUserById = async (req, res, next) =>{
 
     try {
     const individualUser = await User.findById(req.params.id)
+    const allUsers = await User.find()
     if(req.cookies.access_token) {
         isLoggedIn = true
-    }
-    res.render("displayuser", {individualUser, isLoggedIn, linkText, pathText})
+    } 
+    // else {
+    //     res.redirect("/users/login")
+    // }
+    let decodeCookie = jwt_decode(req.cookies.access_token)
+    let userId = decodeCookie.userId
+    const user = await User.findById(userId)
+    const recipes = await Recipe.find({author: userId})
+    res.render("displayuser", {individualUser, user, recipes, allUsers, isLoggedIn, linkText, pathText})
     }
     catch (error) {
-        next(error)
+        // next(error)
+        res.redirect("/users/login")
     }
 }
 

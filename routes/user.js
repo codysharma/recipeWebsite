@@ -28,7 +28,7 @@ router.post('/login', logIn)
 router.get('/recipes/:id', getRecipesByUserId)
 router.get('/logout', logOut)
 router.post('/signup', createUser)
-router.get('/:id', getUserById)
+router.get('/myaccount', getUserById)
 router.use(checkAuth)
 //authentication checkpoint
 // router.get('/:id', getUserById)
