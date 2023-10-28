@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Recipe = require('../models/recipe')
 const User = require('../models/user')
 const {JWT_KEY_SECRET} = require('../config');
@@ -33,27 +34,52 @@ const showAllRecipes = async (req, res, next) => {
     }
 }
 
-const getRecipeById = async (req, res, next) =>{
-    let isLoggedIn = false 
-    let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
-    let pathText = isLoggedIn ? "logout" : "login";
-    // let userId = null
 
-    const individualRecipe = await Recipe.findById(req.params.id)
+
+const getRecipeById = async (req, res, next) => {
+    let isLoggedIn = false;
+    let linkText = "Login/Sign Up";
+    let pathText = "login";
+    let userId = null;
+
     if (req.cookies.access_token) {
-        isLoggedIn = true
-
-        linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
-        pathText = isLoggedIn ? "logout" : "login";
-
-        const decodedToken = jwt.verify(req.cookies.access_token, JWT_KEY_SECRET)
-        userId = decodedToken.userId
+        try {
+            const decodedToken = jwt.verify(req.cookies.access_token, JWT_KEY_SECRET);
+            userId = decodedToken.userId;
+            isLoggedIn = true;
+            linkText = "Logout";
+            pathText = "logout";
+        } catch (error) {
+            // Handle token verification error, if any
+            console.error(error);
+        }
     }
-    // const author = await User.findById(req.params.id)
 
-    // const showButtons = userId && userId.toString() === story.author.id.toString()
-    res.render("displayrecipe", {individualRecipe, isLoggedIn, linkText, pathText})
-}
+    try {
+        const individualRecipe = await Recipe.findById(req.params.id);
+
+        if (!individualRecipe.author) {
+            // Handle case where the author property is undefined
+            res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor: false });
+            return;
+        }
+
+        const authorIdString = individualRecipe.author.toString();
+        const isAuthor = userId === authorIdString;
+
+        res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
+
+
+
+
 
 const createRecipe = async (req, res, next) => {
     const requiredFields = ["title", "equipment", "instructions", "requiredIngredients"]
@@ -90,26 +116,37 @@ const deleteRecipeById = async (req, res, next) => {
     res.redirect("display")
 }
 
-const updateRecipe = async(req, res, next) => {
+const updateRecipe = async (req, res, next) => {
     const requiredFields = ["title", "equipment", "instructions", "requiredIngredients"];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
-        const errorMessage = `missing ${field} in request body`;
-        console.error(errorMessage);
-        return res.send(errorMessage);
+            const errorMessage = `missing ${field} in request body`;
+            console.error(errorMessage);
+            return res.send(errorMessage);
         }
     }
 
     try {
-        const filter = {_id: req.params.id}
-        const newData = req.body//will this actually save as an object with the correct pairs?
-        const updatedRecipe = await Recipe.findOneAndUpdate(filter, newData, {new:true});
-        res.redirect("/recipes/display");//change this to show the recipe just created?
+        const filter = { _id: req.params.id };
+
+        // Exclude author field from newData object
+        const newData = {
+            title: req.body.title,
+            equipment: req.body.equipment,
+            instructions: req.body.instructions,
+            requiredIngredients: req.body.requiredIngredients,
+            // ... other fields ...
+            // Exclude author field to prevent modification
+        };
+
+        const updatedRecipe = await Recipe.findOneAndUpdate(filter, newData, { new: true });
+        res.redirect("/recipes/display"); // Change this to the appropriate redirect URL
     } catch (error) {
-        return res.send(error);
+        console.error(error);
+        return res.status(500).send('Internal Server Error');
     }
-}
+};
 
 const sendEditRecipeForm = async(req, res, next) => {
     let isLoggedIn = !! req.cookies.access_token
