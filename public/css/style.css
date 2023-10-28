@@ -4,7 +4,7 @@ body {
 }
 
 .main {
-    min-height: 80vh;
+    min-height: 75vh;
     font-family: 'Delius Swash Caps', cursive;
 }
 
@@ -72,7 +72,7 @@ header {
     position: relative;
 }
 
-.recipes-by-users {
+.recipes-by-users-button {
     text-align: center;
     width: 345px;
     height: 130px;
@@ -206,5 +206,5 @@ label {
 
 /* --------Recipes By Users Page-------- */
 .recipes-by-users {
-    font-family: 'Delius Swash Caps', cursive;
+    
 }
