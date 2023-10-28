@@ -60,19 +60,13 @@ const getRecipeById = async (req, res, next) => {
 
         if (!individualRecipe.author) {
             // Handle case where the author property is undefined
-            console.log("Author: undefined");
-            console.log("UserId:", userId);
             res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor: false });
             return;
         }
 
-        console.log("Author:", individualRecipe.author);
-        console.log("UserId:", userId);
-
         const authorIdString = individualRecipe.author.toString();
         const isAuthor = userId === authorIdString;
 
-        console.log("IsAuthor:", isAuthor);
         res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor });
     } catch (error) {
         console.error(error);
