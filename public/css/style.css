@@ -1,7 +1,12 @@
 body {
     background-color: rgba(252, 250, 195, 0.795);
+
 }
 
+.main {
+    min-height: 80vh;
+    font-family: 'Delius Swash Caps', cursive;
+}
 
 /* --------Header-------- */
 header {
@@ -67,6 +72,16 @@ header {
     position: relative;
 }
 
+.recipes-by-users {
+    text-align: center;
+    width: 345px;
+    height: 130px;
+    border-radius: 100%;
+    font-family: 'Courgette', cursive;
+    font-size: 46px;
+    cursor: pointer;
+}
+
 
 /* --------Footer-------- */
 footer {
@@ -74,7 +89,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: relative;
     width: 100%;
     bottom: 0px;
     /* font-family: 'Courgette', cursive; */
@@ -126,7 +141,6 @@ label {
 
 .login-title {
     font-size: 50px;
-    /* font-family: 'Pacifico', cursive; */
     font-family: 'Courgette', cursive;
 }
 
@@ -150,4 +164,47 @@ label {
 .sign-up-title {
     font-size: 50px;
     font-family: 'Courgette', cursive;
+}
+
+
+/* --------Recipes List Page-------- */
+.recipes-list {
+
+}
+
+.recipes-list-title {
+    font-size: 30px;
+    font-family: 'Courgette', cursive;
+}
+
+
+/* --------Display Individual Recipe Page-------- */
+.display-recipe {
+
+}
+
+.individual-recipe-title {
+    font-size: 25px;
+    font-family: 'Courgette', cursive;
+}
+
+
+/* --------Create Recipe Page-------- */
+.create-recipe {
+
+}
+
+
+
+
+/* --------Edit Recipe Page-------- */
+.edit-recipe {
+
+}
+
+
+
+/* --------Recipes By Users Page-------- */
+.recipes-by-users {
+    font-family: 'Delius Swash Caps', cursive;
 }
