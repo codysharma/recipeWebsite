@@ -1,6 +1,8 @@
 body {
     background-color: rgba(252, 250, 195, 0.795);
+    font-family: 'Delius Swash Caps', cursive;
 }
+
 
 
 /* --------Header-------- */
@@ -150,4 +152,14 @@ label {
 .sign-up-title {
     font-size: 50px;
     font-family: 'Courgette', cursive;
+}
+
+li {
+    padding: 3px
+}
+
+/* Create and edit recipe forms */
+.createRecipe, .editRecipe {
+    background-color: rgba(179, 253, 130, 0.5);
+    border-radius: 5px;
 }
