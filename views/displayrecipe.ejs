@@ -1,5 +1,5 @@
-<%= individualRecipe %>
-<h2><%= individualRecipe.title %></h2> By: <%= individualRecipe.author %>
+<h2><%= individualRecipe.title %></h2> 
+By: <%= individualRecipe.author %>
 <br>
 <!-- Move the author name to inline with title -->
 Difficulty: <%= individualRecipe.difficulty %>
@@ -35,4 +35,13 @@ Directions:
     <% }) %>
 </ol>
 
-<button><a href="/recipes/<%= individualRecipe.id %>/editrecipe">Edit</a></button>
+<% if (isLoggedIn && isAuthor) { %>
+    <!-- Content visible to logged-in users who are the authors of the recipe -->
+    <button><a href="/recipes/<%= individualRecipe.id %>/editrecipe">Edit</a></button>
+<% } else if (isLoggedIn) { %>
+    <!-- Content visible to logged-in users who are not the authors of the recipe -->
+    <p>You can only edit your own recipes.</p>
+<% } else { %>
+    <!-- Content visible to non-logged-in users -->
+    <p>Please log in to edit or create recipes!</p>
+<% } %>
