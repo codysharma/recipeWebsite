@@ -1,29 +1,38 @@
-<h2>Create recipe page</h2>
+<h2>Create a New Recipe</h2>
 
 <form class="createRecipe" method="POST" action="/recipes/createrecipe"> 
-    <label for="title">Name of recipe: </label>
-    <input id="title" type="text" name="title">
-
-    <label for="equipment">Equipment needed: </label>
-    <input id="equipment" type="text" name="equipment">
-
-    <label for="instructions">List step by step instructions, with each step separated by periods. </label>
-    <input id="instructions" type="textArea" name="instructions" rows="5" columns="60">
-
-    <label for="requiredIngredients">Required ingredients, separating each with a comma: </label>
-    <input id="requiredIngredients" type="textArea" name="requiredIngredients" rows="3" columns="40">
-
-    <label for="optionalIngredients">Optional ingredients, separating each with a comma: </label>
-    <input id="optionalIngredients" type="text" name="optionalIngredients">
-
-    <label for="spices">List spices used, separating each with a comma: </label>
-    <input id="spices" type="text" name="spices">
-
-    <label for="difficulty">Difficulty rating: </label>
-    <input id="difficulty" type="range" name="difficulty" min="1" max="5">
-
-    <label for="author">Author </label>
-    <input id="author" type="text" name="author" value="<%= usr.id %>">
+    <ul>
+        <li>
+            <label for="title">Name of recipe: </label>
+            <input id="title" type="text" name="title">
+        </li>
+        <li>
+            <label for="equipment">Equipment needed: </label>
+            <input id="equipment" type="text" name="equipment">
+        </li>
+        <li>
+            <label for="instructions">List step by step instructions, with each step separated by periods. </label>
+            <input id="instructions" type="textArea" name="instructions" rows="5" columns="60">
+        </li>
+        <li>
+            <label for="requiredIngredients">Required ingredients, separating each with a comma: </label>
+            <input id="requiredIngredients" type="textArea" name="requiredIngredients" rows="3" columns="40">
+        </li>
+        <li>
+            <label for="optionalIngredients">Optional ingredients, separating each with a comma: </label>
+            <input id="optionalIngredients" type="text" name="optionalIngredients">
+        </li>
+        <li>
+            <label for="spices">List spices used, separating each with a comma: </label>
+            <input id="spices" type="text" name="spices">
+        </li>
+        <li>
+            <label for="difficulty">Difficulty rating: </label>
+            <input id="difficulty" type="range" name="difficulty" min="1" max="5">
+        </li>
+    </ul>
+    <!-- <label for="author">Author </label>
+    <input id="author" type="text" name="author" value="= usr.id "> -->
     
-    <input type="submit" value="submit">
+    <input class="submit" type="submit" value="submit">
 </form>
