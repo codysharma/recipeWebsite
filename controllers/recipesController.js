@@ -79,6 +79,7 @@ const getRecipeById = async (req, res, next) => {
     }
 };
 
+
 const createRecipe = async (req, res, next) => {
     const requiredFields = ["title", "equipment", "instructions", "requiredIngredients"]
     for (let i = 0; i < requiredFields.length; i++) {
