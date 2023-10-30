@@ -19,8 +19,8 @@ const showAllRecipes = async (req, res, next) => {
     // const loggedInUser = await User.findById(userId)
 
     try {
-    const allRecipes = await Recipe.find();
-    const allUsers = await User.find()
+        const allRecipes = await Recipe.find();
+        const allUsers = await User.find()
     res.render("recipelist", {
         allRecipes,
         allUsers,
@@ -66,19 +66,18 @@ const getRecipeById = async (req, res, next) => {
 
         const authorIdString = individualRecipe.author.toString();
         const isAuthor = userId === authorIdString;
-
-        res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor });
+        authorObj = await User.findById(authorIdString)
+        if (authorObj == null) {
+            author = "None listed"
+        } else {
+            author = authorObj.name
+        }
+        res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor, author });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 };
-
-
-
-
-
-
 
 
 const createRecipe = async (req, res, next) => {
