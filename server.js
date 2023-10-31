@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
-
 //connection to styling
 app.use('/public', express.static('public'));
 app.use(methodOverride("_method"))
@@ -39,3 +38,9 @@ const startServer = async () => {
 }
 
 startServer();
+
+//-----Event listeners
+// const likeButton = document.querySelector('#likeButton');
+// likeButton.addEventListener("click", function(event) { 
+//     console.log("clicked"); 
+// }) 

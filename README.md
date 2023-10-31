@@ -1,6 +1,5 @@
 ToDo:  
--Liked lists
--Most recent 2 users not being saved as logged in. Created a bunch of test recipes and all say "none listed" under author??
-
+-Liked lists - trying to set up event listener to add recipe using ID to the liked list array in the logged in user object
+  
 Design stuff:  
 -Display recipe page to be pretty format

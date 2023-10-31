@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const jwt_decode = require('jwt-decode')
 
-//Route functions
+//------Route functions
 const showAllRecipes = async (req, res, next) => {
     let isLoggedIn = !!req.cookies.access_token;
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
@@ -58,7 +58,7 @@ const getRecipeById = async (req, res, next) => {
 
         if (!individualRecipe.author) {
             // Handle case where the author property is undefined
-            author = "None listed"
+            let author = "None listed"
 
             res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor: false, author });
             return;
@@ -66,11 +66,12 @@ const getRecipeById = async (req, res, next) => {
         const authorIdString = individualRecipe.author.toString();
         const isAuthor = userId === authorIdString;
         authorObj = await User.findById(authorIdString)
-        if (authorObj == null) {
-            author = "None listed"
-        } else {
-            author = authorObj.name
-        }
+        let author = authorObj.name
+
+        //testing the like button setup
+        console.log(individualRecipe.id);
+        console.log(await User.findById(userId));
+
         res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor, author });
     } catch (error) {
         console.error(error);
