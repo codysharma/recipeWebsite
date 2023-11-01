@@ -47,4 +47,7 @@ Directions:
     <!-- Content visible to non-logged-in users -->
     <p>Please log in to edit or create recipes!</p>
 <% } %>
-</div>
+
+<% if (isLoggedIn) { %>
+<!-- <button id="likeButton" onclick="addToList(' individualRecipe.id')">Add this recipe to your "Liked" list</button> -->
+<%}%>

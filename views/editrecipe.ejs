@@ -31,11 +31,11 @@
             <label for="difficulty">Difficulty rating: </label>
             <input id="difficulty" type="range" name="difficulty" min="1" max="5" value="<%= individualRecipe.difficulty %>">
         </li>
-    
-    <!-- <label for="author">Author </label>
-    <input id="author" type="text" name="author"  value="< individualRecipe.id >"> -->
     </ul>
     <input class="submit" type="submit" value="submit">
+    <br>
+    <label for="author">Author ID - do not change </label>
+    <input id="author" type="text" name="author"  value="<%= individualRecipe.id %>">
 </form>
 
 <form class="deleteRecipe" method="POST" action="/recipes/<%= individualRecipe.id%>?_method=delete">
