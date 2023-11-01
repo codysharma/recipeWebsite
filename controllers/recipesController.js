@@ -198,6 +198,7 @@ const sendEditRecipeForm = async(req, res, next) => {
     const individualRecipe = await Recipe.findById(req.params.id)
 
     try {
+        const usr = await User.findById(userId)
         res.render("editrecipe", {
             userId,
             individualRecipe, 
