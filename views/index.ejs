@@ -1,5 +1,6 @@
 <!--Homepage-->
 <body>
+        <div class="homepage">
         <div id="website-title">
                 <h1>GA Cookbook</h1>
         </div>
@@ -8,5 +9,9 @@
                 <a href="/users/login"><button class="login-home-button">Log In</button></a>
                 <a href="/recipes/byusers"><button class="recipes-by-users-button">Recipes By Users</button></a>
         </div>
-        <%= randomRecipe %>
+        <div class="random-home-recipe">
+                <h2><a href="/recipes/<%= randomRecipe.id %>"><%= randomRecipe.title %></a></h2>
+                <p>By: <%= author %></p>
+        </div>
+</div>
 </body>
