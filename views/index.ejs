@@ -1,12 +1,18 @@
 <!--Homepage-->
 <body>
+        <div class="homepage">
         <div id="website-title">
                 <h1>GA Cookbook</h1>
         </div>
         <div class="home-buttons">
                 <a href="/recipes/display"><button class="recipes-home-button">Recipes</button></a>
                 <a href="/users/login"><button class="login-home-button">Log In</button></a>
-                <a href="/recipes/byusers"><button class="recipes-by-users">Recipes By Users</button></a>
+                <a href="/recipes/byusers"><button class="recipes-by-users-button">Recipes By Users</button></a>
         </div>
-        <%= randomRecipe %>
+        <div class="random-home-recipe">
+                <h3>Try one of our recipes:</h3>
+                <h2><a href="/recipes/<%= randomRecipe.id %>"><%= randomRecipe.title %></a></h2>
+                
+        </div>
+</div>
 </body>

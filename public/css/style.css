@@ -3,7 +3,10 @@ body {
     font-family: 'Delius Swash Caps', cursive;
 }
 
-
+.main {
+    min-height: 75vh;
+    font-family: 'Delius Swash Caps', cursive;
+}
 
 /* --------Header-------- */
 header {
@@ -28,6 +31,17 @@ header {
     font-size: 15px;
 }
 
+#account-header {
+    position: absolute;
+    right: 140px;
+    font-size: 15px;
+}
+
+#recipes-by-user-header {
+    padding: 10px;
+    font-size: 15px;
+}
+
 
 /* --------Home Page-------- */
 #website-title {
@@ -47,6 +61,7 @@ header {
     font-family: 'Courgette', cursive;
     font-size: 78px;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .login-home-button {
@@ -57,16 +72,33 @@ header {
     font-family: 'Courgette', cursive;
     font-size: 78px;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .home-buttons {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
     top: -50px;
     position: relative;
+}
+
+.recipes-by-users-button {
+    text-align: center;
+    width: 345px;
+    height: 130px;
+    border-radius: 100%;
+    font-family: 'Courgette', cursive;
+    font-size: 46px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.random-home-recipe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -76,7 +108,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: relative;
     width: 100%;
     bottom: 0px;
     /* font-family: 'Courgette', cursive; */
@@ -128,7 +160,6 @@ label {
 
 .login-title {
     font-size: 50px;
-    /* font-family: 'Pacifico', cursive; */
     font-family: 'Courgette', cursive;
 }
 

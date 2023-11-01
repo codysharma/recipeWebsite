@@ -19,8 +19,8 @@ const showAllRecipes = async (req, res, next) => {
     // const loggedInUser = await User.findById(userId)
 
     try {
-    const allRecipes = await Recipe.find();
-    const allUsers = await User.find()
+        const allRecipes = await Recipe.find();
+        const allUsers = await User.find()
     res.render("recipelist", {
         allRecipes,
         allUsers,
