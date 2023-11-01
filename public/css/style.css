@@ -2,7 +2,6 @@ body {
     background-color: rgba(252, 250, 195, 0.795);
 }
 
-
 .main {
     min-height: 75vh;
     font-family: 'Delius Swash Caps', cursive;
@@ -31,6 +30,17 @@ header {
     font-size: 15px;
 }
 
+#account-header {
+    position: absolute;
+    right: 140px;
+    font-size: 15px;
+}
+
+#recipes-by-user-header {
+    padding: 10px;
+    font-size: 15px;
+}
+
 
 /* --------Home Page-------- */
 #website-title {
@@ -50,6 +60,7 @@ header {
     font-family: 'Courgette', cursive;
     font-size: 78px;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .login-home-button {
@@ -60,11 +71,11 @@ header {
     font-family: 'Courgette', cursive;
     font-size: 78px;
     cursor: pointer;
+    margin: 0 10px;
 }
 
 .home-buttons {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
@@ -80,6 +91,13 @@ header {
     font-family: 'Courgette', cursive;
     font-size: 46px;
     cursor: pointer;
+    margin: 0 10px;
+}
+
+.random-home-recipe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
