@@ -34,8 +34,7 @@
     </ul>
     <input class="submit" type="submit" value="submit">
     <br>
-    <label for="author">Author ID - do not change </label>
-    <input id="author" type="text" name="author"  value="<%= individualRecipe.id %>">
+    <p>Author ID: <%= usr.id %></p>
 </form>
 
 <form class="deleteRecipe" method="POST" action="/recipes/<%= individualRecipe.id%>?_method=delete">
