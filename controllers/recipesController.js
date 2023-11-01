@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const jwt_decode = require('jwt-decode')
 
-//Route functions
+//------Route functions
 const showAllRecipes = async (req, res, next) => {
     let isLoggedIn = !!req.cookies.access_token;
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
@@ -34,8 +34,6 @@ const showAllRecipes = async (req, res, next) => {
     }
 }
 
-
-
 const getRecipeById = async (req, res, next) => {
     let isLoggedIn = false;
     let linkText = "Login/Sign Up";
@@ -60,18 +58,20 @@ const getRecipeById = async (req, res, next) => {
 
         if (!individualRecipe.author) {
             // Handle case where the author property is undefined
-            res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor: false });
+            let author = "None listed"
+
+            res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor: false, author });
             return;
         }
-
         const authorIdString = individualRecipe.author.toString();
         const isAuthor = userId === authorIdString;
         authorObj = await User.findById(authorIdString)
-        if (authorObj == null) {
-            author = "None listed"
-        } else {
-            author = authorObj.name
-        }
+        let author = authorObj.name
+
+        //testing the like button setup
+        console.log(individualRecipe.id);
+        console.log(await User.findById(userId));
+
         res.render('displayrecipe', { individualRecipe, isLoggedIn, linkText, pathText, userId, isAuthor, author });
     } catch (error) {
         console.error(error);
@@ -80,6 +80,7 @@ const getRecipeById = async (req, res, next) => {
 };
 
 
+//How would I create a nested function for separating the array items?
 const createRecipe = async (req, res, next) => {
     const requiredFields = ["title", "equipment", "instructions", "requiredIngredients"]
     for (let i = 0; i < requiredFields.length; i++) {
@@ -91,6 +92,43 @@ const createRecipe = async (req, res, next) => {
         }
     }
     try {
+        const instructions = req.body.instructions
+        const instructionsList = instructions.split('.')
+        if (instructionsList[instructionsList.length] === "" || instructionsList[instructionsList.length] === " " || instructionsList[instructionsList.length] === undefined) {
+            instructionsList.pop()
+        }
+        req.body.instructions = instructionsList
+
+        const equipment = req.body.equipment
+        const equipmentList = equipment.split(',')
+        if (equipmentList[equipmentList.length] === "" || equipmentList[equipmentList.length] === " " || equipmentList[equipmentList.length] === undefined) {
+            equipmentList.pop()
+        }
+        req.body.equipment = equipmentList
+
+        const requiredIngredients = req.body.requiredIngredients
+        const requiredIngredientsList = requiredIngredients.split(',')
+        if (requiredIngredientsList[requiredIngredientsList.length] === "" || requiredIngredientsList[requiredIngredientsList.length] === " " || requiredIngredientsList[requiredIngredientsList.length] === undefined) {
+            requiredIngredientsList.pop()
+        }
+        req.body.requiredIngredients = requiredIngredientsList
+
+        const optionalIngredients = req.body.optionalIngredients
+        const optionalIngredientsList = optionalIngredients.split(',')
+        if (optionalIngredientsList[optionalIngredientsList.length] === "" || optionalIngredientsList[optionalIngredientsList.length] === " " || optionalIngredientsList[optionalIngredientsList.length] === undefined) {
+            optionalIngredientsList.pop()
+        }
+        req.body.optionalIngredients = optionalIngredientsList
+
+        const spices = req.body.spices
+        const spicesList = spices.split(',')
+        if (spicesList[spicesList.length] === "" || spicesList[spicesList.length] === " " || spicesList[spicesList.length] === undefined) {
+            spicesList.pop()
+        }
+        req.body.spices = spicesList
+
+        // separate(req.body)
+
         const createdRecipe = await Recipe.create(req.body)
         res.redirect(`/recipes/display`)
     } catch (error) {
@@ -98,16 +136,9 @@ const createRecipe = async (req, res, next) => {
     }
 }
         
-//to be edited, so recipe can only be deleted by creater
 const deleteRecipeById = async (req, res, next) => {
     try {
         await Recipe.findByIdAndDelete({_id: req.params.id})
-    // if (Recipe.author.id === userId) {
-    //     await Recipe.findByIdAndDelete({_id: req.params.id})
-    //     res.redirect('recipes/display')
-    // } else {
-    //     console.log("cannot do");
-    // }
     }
     catch (error) {
         next(error)
@@ -240,6 +271,46 @@ const getRecipesByUserId = async(req, res, next) => {
     const author = await User.findById(req.params.id)
     res.render("userrecipes", {recipes, author, isLoggedIn, linkText, pathText})
 
+}
+
+//Nested functions
+function separate() {
+    const instructions = req.body.instructions
+    const instructionsList = instructions.split('.')
+    if (instructionsList[instructionsList.length] === "" || instructionsList[instructionsList.length] === " " || instructionsList[instructionsList.length] === undefined) {
+        instructionsList.pop()
+    }
+    req.body.instructions = instructionsList
+
+    const equipment = req.body.equipment
+    const equipmentList = equipment.split(',')
+    if (equipmentList[equipmentList.length] === "" || equipmentList[equipmentList.length] === " " || equipmentList[equipmentList.length] === undefined) {
+        equipmentList.pop()
+    }
+    req.body.equipment = equipmentList
+
+    const requiredIngredients = req.body.requiredIngredients
+    const requiredIngredientsList = requiredIngredients.split(',')
+    if (requiredIngredientsList[requiredIngredientsList.length] === "" || requiredIngredientsList[requiredIngredientsList.length] === " " || requiredIngredientsList[requiredIngredientsList.length] === undefined) {
+        requiredIngredientsList.pop()
+    }
+    req.body.requiredIngredients = requiredIngredientsList
+
+    const optionalIngredients = req.body.optionalIngredients
+    const optionalIngredientsList = optionalIngredients.split(',')
+    if (optionalIngredientsList[optionalIngredientsList.length] === "" || optionalIngredientsList[optionalIngredientsList.length] === " " || optionalIngredientsList[optionalIngredientsList.length] === undefined) {
+        optionalIngredientsList.pop()
+    }
+    req.body.optionalIngredients = optionalIngredientsList
+
+    const spices = req.body.spices
+    const spicesList = spices.split(',')
+    if (spicesList[spicesList.length] === "" || spicesList[spicesList.length] === " " || spicesList[spicesList.length] === undefined) {
+        spicesList.pop()
+    }
+    req.body.spices = spicesList
+
+    return req.body
 }
 
 module.exports = {

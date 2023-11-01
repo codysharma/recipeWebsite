@@ -11,6 +11,11 @@ const index = async (req, res, next) => {
         const decodedToken = jwt.verify(req.cookies.access_token, JWT_KEY_SECRET)
         userId = decodedToken.userId
     }
+    //----Tool used to delete any recipes with "test" in the title to keep things clean
+    // const list1 = await Recipe.deleteMany({"title" : {$regex : "test"}});
+    // console.log(list1);
+    //-----End tool
+
     count = await Recipe.count({})
     random = Math.floor(Math.random() * count)
     list = await Recipe.find() 

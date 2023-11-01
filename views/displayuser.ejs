@@ -1,2 +1,17 @@
-<h2>Individual user page</h2>
-<%= individualUser %>
+<h2>My account page</h2>
+<ul class="userDisplay" id="accountInfo">
+    Account Info:
+    <li>Username: <%= user.name %></li>
+    <li>Email: <%= user.email %></li>
+</ul>
+
+<ul class="userDisplay" id="recipes">
+    My Recipes:
+    <% for(let i = 0; i < recipes.length; i++) {
+        let recipeNumber = i + 1
+        %>
+    <li><a class="recipeLink" href="/recipes/<%= recipes[i].id %>" ><%= recipes[i].title %></a></li>
+    <% } %>
+</ul>
+<button><a href="/users/edituser/<%= user.id %>">Edit User</a></button>
+
