@@ -13,11 +13,12 @@ const showAllRecipes = async (req, res, next) => {
     let isLoggedIn = !!req.cookies.access_token;
     let linkText = isLoggedIn ? "Logout" : "Login/Sign Up";
     let pathText = isLoggedIn ? "logout" : "login";
-
+    
+    console.log('error!!!');
     // let decodeCookie = jwt_decode(req.cookies.access_token)
     // const userId = decodeCookie.userId
     // const loggedInUser = await User.findById(userId)
-
+    
     try {
         const allRecipes = await Recipe.find();
         const allUsers = await User.find()

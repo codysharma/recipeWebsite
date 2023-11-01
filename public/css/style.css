@@ -1,6 +1,5 @@
 body {
     background-color: rgba(252, 250, 195, 0.795);
-    font-family: 'Delius Swash Caps', cursive;
 }
 
 .main {
@@ -185,12 +184,45 @@ label {
     font-family: 'Courgette', cursive;
 }
 
-li {
-    padding: 3px
+
+/* --------Recipes List Page-------- */
+.recipes-list {
+
 }
 
-/* Create and edit recipe forms */
-.createRecipe, .editRecipe {
-    background-color: rgba(179, 253, 130, 0.5);
-    border-radius: 5px;
+.recipes-list-title {
+    font-size: 30px;
+    font-family: 'Courgette', cursive;
+}
+
+
+/* --------Display Individual Recipe Page-------- */
+.display-recipe {
+
+}
+
+.individual-recipe-title {
+    font-size: 25px;
+    font-family: 'Courgette', cursive;
+}
+
+
+/* --------Create Recipe Page-------- */
+.create-recipe {
+
+}
+
+
+
+
+/* --------Edit Recipe Page-------- */
+.edit-recipe {
+
+}
+
+
+
+/* --------Recipes By Users Page-------- */
+.recipes-by-users {
+    
 }
