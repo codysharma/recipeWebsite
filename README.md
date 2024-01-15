@@ -1,5 +1,3 @@
-
-
 ![image](https://github.com/codysharma/recipeWebsite/assets/123990673/39abc1ad-9ddc-4635-bec2-4dbaffc312d0)
 
 ![image](https://github.com/codysharma/recipeWebsite/assets/123990673/7599d481-d0cb-45bb-8082-69cfad209486)
