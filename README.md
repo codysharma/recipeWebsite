@@ -1,8 +1,10 @@
-Tech used: Express, EJS, Node, MongoDB, Atlas
+## Tech used: 
+Express, EJS, Node, MongoDB, Atlas
 
+## Overview
 A full stack application using Express, Node, and EJS templating, this Recipe Website allows users to browse recipes saved to nonSQL database using MongoDB. Using JWT to authenticate login, after logging in, users have full CRUD capability to create recipes, edit their own recipes (but no others, as verified by their unique JWT), or delete their recipes. Visitors can also click on registered authors and see all the recipes by that author.
 
-
+## Screenshots
 The home page showing the major links, along with a randomly displayed recipe pulled from the database.
 ![image](https://github.com/codysharma/recipeWebsite/assets/123990673/39abc1ad-9ddc-4635-bec2-4dbaffc312d0)
 
